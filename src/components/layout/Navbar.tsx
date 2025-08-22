@@ -9,7 +9,7 @@ const Navbar = () => {
       <nav className="w-[90%] bg-transparent backdrop-blur-xl border border-black/10 dark:border-white/30 rounded-full px-8 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
             <Button
               asChild
               className="dark:bg-transparent hover:bg-black cursor-pointer"

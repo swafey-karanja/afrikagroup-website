@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/layout/Navbar";
+import AnimatedCasinoBackground from "@/components/shared/background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +36,22 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          {/* Fixed animated background for entire website */}
+          <AnimatedCasinoBackground
+            fixed={true}
+            zIndex="-z-50"
+            enableParallax={true}
+            backgroundColor="bg-blue-100 dark:bg-black"
+            opacity="opacity-100"
+          />
+
+          {/* Navbar - positioned above background */}
+          <div className="relative z-40">
+            <Navbar />
+          </div>
+
+          {/* Main content - positioned above background */}
+          <div className="relative z-10">{children}</div>
         </ThemeProvider>
       </body>
     </html>
