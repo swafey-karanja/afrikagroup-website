@@ -72,14 +72,17 @@ const BlogCarousel = () => {
   };
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-white/40 backdrop-blur-xl dark:bg-black/40 rounded-2xl">
+    <section
+      className="w-full py-12 md:py-16 lg:py-20 bg-[#fffbf0] backdrop-blur-xl dark:bg-black"
+      style={{ borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
+    >
       <div className="w-full">
         {/* Header */}
         <div className="container px-4 md:px-6 mx-auto mb-12">
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                Our partners
+                <span className="text-[#fcb11b]">Our</span> partners
               </h2>
               <div className="w-20 h-1 bg-[#fcb11b]"></div>
             </div>

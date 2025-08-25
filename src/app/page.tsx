@@ -1,11 +1,15 @@
 import Hero from "@/components/layout/Hero";
-import NewsSection from "@/components/sections/partners";
+import BlogCarousel from "@/components/sections/partners";
+import AwardsSection from "@/components/sections/awards";
+import EventGallery from "@/components/sections/EventGallery";
 
 export default function Home() {
   return (
     <div className="">
       <Hero />
-      <NewsSection />
+      <BlogCarousel />
+      <AwardsSection />
+      <EventGallery />
     </div>
   );
 }

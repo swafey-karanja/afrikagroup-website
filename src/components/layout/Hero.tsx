@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import styles from "../../../styles/Hero.module.css";
 
 interface HeroProps {
@@ -13,15 +13,7 @@ interface HeroProps {
   ctaSecondary?: ReactNode;
   showScrollIndicator?: boolean;
   customContent?: ReactNode;
-  /**
-   * Container background - only affects the hero content area
-   * Use 'transparent' to let the global background show through
-   * @default "transparent"
-   */
   containerBackground?: string;
-  /**
-   * Additional styling for the hero container
-   */
   className?: string;
 }
 
@@ -30,16 +22,16 @@ const Hero: React.FC<HeroProps> = ({
   title = (
     <>
       Africanising
+      <br />
       <span
-        className={`mx-4 text-[#fcb11b] ${styles["animate-spin-glow"]} inline-block`}
+        className={`text-[#fcb11b] ${styles["animate-spin-glow"]} inline-block`}
         style={{ animationDelay: "1.2s" }}
       >
-        •
+        iGaming
       </span>
-      iGaming
     </>
   ),
-  subtitle = "Driving iGaming Business to Africa.",
+  subtitle = "Bringing next-level innovation to gaming, fintech & blockchain",
   description = "Strategic solutions for iGaming growth, optimization, and expansion.",
   showProgressBar = true,
   ctaPrimary = (
@@ -64,76 +56,151 @@ const Hero: React.FC<HeroProps> = ({
   containerBackground = "transparent",
   className = "",
 }) => {
-  return (
-    <div className={`relative ${height} ${containerBackground} ${className}`}>
-      {/* Main Content Container */}
-      <div
-        className={`relative z-20 flex items-center justify-center ${
-          height === "min-h-screen" ? "min-h-screen" : "h-full"
-        } px-4`}
-      >
-        <div className="text-center max-w-5xl mx-auto w-full">
-          {/* Custom content takes precedence if provided */}
-          {customContent ? (
-            customContent
-          ) : (
-            <>
-              {/* Enhanced Animated Title */}
-              <h1 className="text-6xl md:text-8xl font-bold text-black dark:text-white mb-6 relative">
-                {title}
-              </h1>
+  const [offsetY, setOffsetY] = useState(0);
 
-              <div className="relative mb-8">
-                {subtitle && (
-                  <p
-                    className={`text-xl md:text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4 ${styles["animate-fade-in-up"]}`}
+  useEffect(() => {
+    const handleScroll = () => setOffsetY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      {/* Sticky Hero Section - this creates the fixed effect */}
+      <div
+        className={`sticky top-0 h-screen overflow-hidden ${containerBackground} ${className}`}
+        // style={{
+        //   background:
+        //     "linear-gradient(135deg, #4338ca 0%, #3b82f6 25%, #06b6d4  75%, #10b981 100%)",
+        // }}
+      >
+        {/* Geometric Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Large circle on the right */}
+          {/* <div
+            className="absolute -right-32 top-1/2 transform -translate-y-1/2 w-96 h-96 rounded-full"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(16, 185, 129, 0.4) 100%)",
+              filter: "blur(1px)",
+            }}
+          /> */}
+
+          {/* Bottom right curved shape */}
+          {/* <div
+            className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full"
+            style={{
+              background:
+                "linear-gradient(225deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.3) 100%)",
+              filter: "blur(2px)",
+            }}
+          /> */}
+        </div>
+
+        {/* Main Content Container */}
+        <div
+          className={`relative z-20 flex items-center justify-between ${
+            height === "min-h-screen" ? "min-h-screen" : "h-full"
+          } px-8 md:px-16 lg:px-24`}
+        >
+          {/* Left side - Main Title */}
+          <div
+            className="flex-1 max-w-4xl"
+            style={{
+              transform: `translateY(${Math.max(0, offsetY * -0.3)}px)`,
+              opacity: Math.max(0.3, 1 - offsetY / 800),
+            }}
+          >
+            {customContent ? (
+              customContent
+            ) : (
+              <>
+                <h1 className="text-8xl md:text-9xl lg:text-[12rem] text-black dark:text-white mb-6 leading-[0.85] tracking-tight">
+                  {title}
+                </h1>
+
+                {/* CTA Buttons - positioned under title */}
+                {(ctaPrimary || ctaSecondary) && (
+                  <div
+                    className="flex flex-col sm:flex-row gap-4 mt-16"
+                    style={{
+                      transform: `translateY(${Math.max(
+                        0,
+                        offsetY * -0.05
+                      )}px)`,
+                      opacity: Math.max(0.1, 1 - offsetY / 300),
+                    }}
                   >
-                    {subtitle}
-                  </p>
-                )}
-                {description && (
-                  <p
-                    className={`text-xl text-gray-700 dark:text-gray-300 mb-4 ${styles["animate-fade-in-up"]}`}
-                  >
-                    {description}
-                  </p>
-                )}
-                {showProgressBar && (
-                  <div className="relative h-2 w-48 mx-auto overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-r from-[#fcb11b] via-white to-orange-400 ${styles["animate-progress-wave"]}`}
-                    />
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent ${styles["animate-shimmer"]}`}
-                    />
+                    {ctaPrimary}
+                    {ctaSecondary}
                   </div>
                 )}
-              </div>
+              </>
+            )}
+          </div>
 
-              {/* Animated CTA Buttons */}
-              {(ctaPrimary || ctaSecondary) && (
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-                  {ctaPrimary}
-                  {ctaSecondary}
-                </div>
-              )}
-            </>
-          )}
+          {/* Right side - Subtitle/Description */}
+          <div
+            className="flex-1 max-w-md ml-8 self-end pb-20"
+            style={{
+              transform: `translateY(${Math.max(0, offsetY * -0.2)}px)`,
+              opacity: Math.max(0.2, 1 - offsetY / 600),
+            }}
+          >
+            {subtitle && (
+              <p className="text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed">
+                {subtitle}
+              </p>
+            )}
+
+            {showProgressBar && (
+              <div
+                className="relative h-2 w-48 overflow-hidden rounded-full bg-white/20 mt-8"
+                style={{
+                  transform: `translateY(${Math.max(0, offsetY * -0.1)}px)`,
+                  opacity: Math.max(0.1, 1 - offsetY / 400),
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#fcb11b] via-white to-orange-400 animate-pulse" />
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                  style={{
+                    animation: "shimmer 2s infinite",
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Scroll Indicator */}
+        {showScrollIndicator && height === "min-h-screen" && (
+          <div
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20"
+            style={{ opacity: Math.max(0, 1 - offsetY / 300) }}
+          >
+            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse" />
+            </div>
+            <p className="text-white/60 text-sm mt-2 font-medium">Scroll</p>
+          </div>
+        )}
       </div>
 
-      {/* Scroll Indicator */}
-      {showScrollIndicator && height === "min-h-screen" && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-          <div className="w-6 h-10 border-2 border-[#fcb11b] rounded-full flex justify-center">
-            <div
-              className={`w-1 h-3 bg-[#fcb11b] rounded-full mt-2 ${styles["animate-pulse"]}`}
-            />
-          </div>
-          <p className="text-[#fcb11b] text-sm mt-2 font-medium">Scroll</p>
-        </div>
-      )}
-    </div>
+      {/* Spacer to allow scroll distance for the sticky effect */}
+      <div className="h-screen bg-transparent pointer-events-none"></div>
+
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+      `}</style>
+    </>
   );
 };
 

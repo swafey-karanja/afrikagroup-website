@@ -55,21 +55,21 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
   return (
     <div className={containerClasses}>
       {/* Casino-themed animated sweeps and gradients */}
-      <div
+      {/* <div
         className={`absolute inset-0 bg-gradient-to-tr from-transparent via-green-500/20 to-transparent ${styles["animate-chip-sweep"]}`}
       />
       <div
         className={`absolute inset-0 bg-gradient-to-tr from-transparent via-red-500/20 to-transparent ${styles["animate-chip-sweep-reverse"]}`}
-      />
+      /> */}
       <div
         className={`absolute inset-0 bg-gradient-to-bl from-yellow-400/10 via-transparent to-green-600/30 ${styles["animate-jackpot-pulse"]}`}
       />
-      <div
+      {/* <div
         className={`absolute inset-0 bg-gradient-radial from-red-600/40 via-transparent to-transparent ${styles["animate-roulette-spin"]}`}
-      />
-      <div
+      /> */}
+      {/* <div
         className={`absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent ${styles["animate-table-drift"]}`}
-      />
+      /> */}
       <div
         className={`absolute inset-0 bg-gradient-conic from-transparent via-yellow-500/20 to-red-600/20 ${styles["animate-wheel-spin"]}`}
       />
@@ -89,12 +89,12 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
       />
 
       {/* Gold shimmer and casino glow effects */}
-      <div
+      {/* <div
         className={`absolute inset-0 bg-gradient-to-br from-transparent via-yellow-400/15 to-transparent w-[200%] h-[200%] ${styles["animate-gold-shimmer"]}`}
       />
       <div
         className={`absolute top-[15%] left-[15%] right-[15%] h-[25%] bg-gradient-to-r from-green-600/15 via-red-600/25 to-green-600/15 blur-md ${styles["animate-casino-glow"]}`}
-      />
+      /> */}
 
       {/* Playing cards animation */}
       <div
