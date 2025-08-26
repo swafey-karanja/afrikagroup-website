@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex justify-center py-4">
-      <nav className="w-[90%] bg-transparent backdrop-blur-xl border border-black/10 dark:border-white/30 rounded-full px-8 py-4">
+    <div className="fixed top-0 left-0 w-full flex justify-center py-4 z-20">
+      <nav className="w-[90%] bg-transparent backdrop-blur-sm border border-black/10 dark:border-white/30 rounded-full px-8 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">

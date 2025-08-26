@@ -17,7 +17,7 @@ interface HeroProps {
   className?: string;
 }
 
-const Hero: React.FC<HeroProps> = ({
+const BottomHero: React.FC<HeroProps> = ({
   height = "min-h-screen",
   title = (
     <>
@@ -34,23 +34,6 @@ const Hero: React.FC<HeroProps> = ({
   subtitle = "Bringing next-level innovation to gaming, fintech & blockchain",
   description = "Strategic solutions for iGaming growth, optimization, and expansion.",
   showProgressBar = true,
-  ctaPrimary = (
-    <button className="group relative px-8 py-4 bg-[#fcb11b] text-black cursor-pointer dark:text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-orange-400 hover:scale-105">
-      <span className="relative z-10">Get Started</span>
-      <div className="absolute inset-0 bg-white dark:bg-gray-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-      <span className="absolute inset-0 z-10 flex items-center justify-center text-black dark:text-white opacity-0 group-hover:opacity-100 font-bold transition-opacity duration-300">
-        Get Started
-      </span>
-    </button>
-  ),
-  ctaSecondary = (
-    <button className="group relative px-8 py-4 border-2 border-black cursor-pointer dark:border-white text-black dark:text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:border-orange-500 hover:scale-105">
-      <span className="relative z-10 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
-        Learn More
-      </span>
-      <div className="absolute inset-0 bg-[#fcb11b] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom" />
-    </button>
-  ),
   showScrollIndicator = true,
   customContent,
   containerBackground = "transparent",
@@ -68,7 +51,7 @@ const Hero: React.FC<HeroProps> = ({
     <>
       {/* Sticky Hero Section - this creates the fixed effect */}
       <div
-        className={`sticky top-0 h-screen overflow-hidden ${containerBackground} ${className}`}
+        className={`sticky bottom-0 h-screen overflow-hidden ${containerBackground} ${className}`}
         // style={{
         //   background:
         //     "linear-gradient(135deg, #4338ca 0%, #3b82f6 25%, #06b6d4  75%, #10b981 100%)",
@@ -118,23 +101,6 @@ const Hero: React.FC<HeroProps> = ({
                 <h1 className="text-8xl md:text-9xl lg:text-[12rem] text-black dark:text-white mb-6 leading-[0.85] tracking-tight">
                   {title}
                 </h1>
-
-                {/* CTA Buttons - positioned under title */}
-                {(ctaPrimary || ctaSecondary) && (
-                  <div
-                    className="flex flex-col sm:flex-row gap-4 mt-16"
-                    style={{
-                      transform: `translateY(${Math.max(
-                        0,
-                        offsetY * -0.05
-                      )}px)`,
-                      opacity: Math.max(0.1, 1 - offsetY / 300),
-                    }}
-                  >
-                    {ctaPrimary}
-                    {ctaSecondary}
-                  </div>
-                )}
               </>
             )}
           </div>
@@ -204,4 +170,4 @@ const Hero: React.FC<HeroProps> = ({
   );
 };
 
-export default Hero;
+export default BottomHero;

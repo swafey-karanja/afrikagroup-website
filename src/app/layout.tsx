@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/layout/Navbar";
 import AnimatedCasinoBackground from "@/components/shared/background";
+import Footer from "@/components/layout/Footer";
+import BottomHero from "@/components/layout/bottomHero";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,19 +41,15 @@ export default function RootLayout({
           {/* Fixed animated background for entire website */}
           <AnimatedCasinoBackground
             fixed={true}
-            zIndex="-z-50"
             enableParallax={true}
             backgroundColor="bg-blue-100 dark:bg-black"
             opacity="opacity-100"
           />
-
-          {/* Navbar - positioned above background */}
-          <div className="relative z-40">
-            <Navbar />
-          </div>
-
+          <Navbar />
           {/* Main content - positioned above background */}
           <div className="relative z-10">{children}</div>
+          <Footer />
+          <BottomHero />
         </ThemeProvider>
       </body>
     </html>
