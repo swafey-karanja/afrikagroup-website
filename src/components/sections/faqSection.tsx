@@ -61,7 +61,7 @@ export default function Accordion() {
   };
 
   return (
-    <div className="bg-[#fffbf0] backdrop-blur-xl dark:bg-black w-full py-12 md:py-16">
+    <div className=" w-full py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="pb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">

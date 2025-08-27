@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import AnimatedCasinoBackground from "@/components/shared/background";
 import Footer from "@/components/layout/Footer";
 import BottomHero from "@/components/layout/bottomHero";
+import Hero from "@/components/layout/Hero";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,14 +43,20 @@ export default function RootLayout({
           <AnimatedCasinoBackground
             fixed={true}
             enableParallax={true}
-            backgroundColor="bg-blue-100 dark:bg-black"
+            backgroundColor="bg-[#ffedca] dark:bg-black"
             opacity="opacity-100"
           />
-          <Navbar />
+
           {/* Main content - positioned above background */}
-          <div className="relative z-10">{children}</div>
-          <Footer />
-          <BottomHero />
+          <div className="relative min-h-[400vh] ">
+            {" "}
+            {/* Increased height for scroll effect */}
+            <Navbar />
+            <Hero />
+            {children}
+            {/* Add some spacing to allow for scroll effect */}
+            <div className="h-[94vh] invisible pointer-events-none bg-transparent"></div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

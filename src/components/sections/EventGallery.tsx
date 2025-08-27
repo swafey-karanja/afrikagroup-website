@@ -69,7 +69,7 @@ const EventGallery = () => {
       : portfolioItems.filter((item) => item.category === activeFilter);
 
   return (
-    <div className="w-full bg-[#fffbf0] backdrop-blur-xl dark:bg-black py-6">
+    <div className="w-full py-6">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="pb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">

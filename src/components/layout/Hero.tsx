@@ -57,53 +57,37 @@ const Hero: React.FC<HeroProps> = ({
   className = "",
 }) => {
   const [offsetY, setOffsetY] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setOffsetY(window.scrollY);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(scrollTop / docHeight, 1);
+
+      setOffsetY(scrollTop);
+      setScrollProgress(progress);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isTransitioning = scrollProgress > 0.5;
+
   return (
     <>
-      {/* Sticky Hero Section - this creates the fixed effect */}
       <div
-        className={`sticky top-0 h-screen overflow-hidden ${containerBackground} ${className}`}
-        // style={{
-        //   background:
-        //     "linear-gradient(135deg, #4338ca 0%, #3b82f6 25%, #06b6d4  75%, #10b981 100%)",
-        // }}
+        className={`sticky top-0 bottom-0 h-screen overflow-hidden ${containerBackground} ${className}`}
       >
-        {/* Geometric Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Large circle on the right */}
-          {/* <div
-            className="absolute -right-32 top-1/2 transform -translate-y-1/2 w-96 h-96 rounded-full"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(16, 185, 129, 0.4) 100%)",
-              filter: "blur(1px)",
-            }}
-          /> */}
+        <div className="absolute inset-0 overflow-hidden"></div>
 
-          {/* Bottom right curved shape */}
-          {/* <div
-            className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full"
-            style={{
-              background:
-                "linear-gradient(225deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.3) 100%)",
-              filter: "blur(2px)",
-            }}
-          /> */}
-        </div>
-
-        {/* Main Content Container */}
         <div
           className={`relative z-20 flex items-center justify-between ${
             height === "min-h-screen" ? "min-h-screen" : "h-full"
           } px-8 md:px-16 lg:px-24`}
         >
-          {/* Left side - Main Title */}
           <div
             className="flex-1 max-w-4xl"
             style={{
@@ -115,20 +99,75 @@ const Hero: React.FC<HeroProps> = ({
               customContent
             ) : (
               <>
-                <h1 className="text-8xl md:text-9xl lg:text-[12rem] text-black dark:text-white mb-6 leading-[0.85] tracking-tight">
-                  {title}
-                </h1>
+                <div className="relative">
+                  <h1
+                    className={`text-8xl md:text-9xl lg:text-[12rem] text-black dark:text-white mb-6 leading-[0.85] tracking-tight transition-all duration-1000 ${
+                      isTransitioning
+                        ? "opacity-0 transform -translate-y-10"
+                        : "opacity-100"
+                    }`}
+                  >
+                    {title}
+                  </h1>
 
-                {/* CTA Buttons - positioned under title */}
+                  {description && (
+                    <p
+                      className={`text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed transition-all duration-1000 ${
+                        isTransitioning
+                          ? "opacity-0 transform -translate-y-10"
+                          : "opacity-100"
+                      }`}
+                    >
+                      {description}
+                    </p>
+                  )}
+                </div>
+
+                {/* Final Transformation Section */}
+                <div className="absolute inset-0 z-50">
+                  <div>
+                    <h1
+                      className={`text-[4rem] md:text-[5rem] lg:text-[6rem] text-black font-bold dark:text-white mb-6 leading-[0.85] tracking-tight transition-all duration-1000 ${
+                        scrollProgress > 0.85
+                          ? "opacity-100 transform translate-y-0"
+                          : "opacity-0 transform translate-y-10"
+                      }`}
+                    >
+                      we are committed
+                      <br />
+                      <span
+                        className={`text-[#fcb11b] ${styles["animate-spin-glow"]} inline-block mt-5`}
+                      >
+                        We aim for progress.
+                      </span>
+                    </h1>
+
+                    {description && (
+                      <p
+                        className={`text-xl md:text-2xl font-medium text-black dark:text-white py-10 leading-relaxed transition-all duration-1000 ${
+                          scrollProgress > 0.85
+                            ? "opacity-100 transform translate-y-0"
+                            : "opacity-0 transform translate-y-10"
+                        }`}
+                      >
+                        {description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
                 {(ctaPrimary || ctaSecondary) && (
                   <div
-                    className="flex flex-col sm:flex-row gap-4 mt-16"
+                    className={`flex flex-col sm:flex-row gap-4 mt-16 transition-all duration-1000 ${
+                      isTransitioning
+                        ? "opacity-0 transform translate-y-5"
+                        : "opacity-100"
+                    }`}
                     style={{
                       transform: `translateY(${Math.max(
                         0,
                         offsetY * -0.05
                       )}px)`,
-                      opacity: Math.max(0.1, 1 - offsetY / 300),
                     }}
                   >
                     {ctaPrimary}
@@ -139,7 +178,6 @@ const Hero: React.FC<HeroProps> = ({
             )}
           </div>
 
-          {/* Right side - Subtitle/Description */}
           <div
             className="flex-1 max-w-md ml-8 self-end pb-20"
             style={{
@@ -147,48 +185,92 @@ const Hero: React.FC<HeroProps> = ({
               opacity: Math.max(0.2, 1 - offsetY / 600),
             }}
           >
-            {subtitle && (
-              <p className="text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed">
-                {subtitle}
-              </p>
-            )}
+            <div>
+              {subtitle && (
+                <p
+                  className={`text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed transition-all duration-1000 ${
+                    isTransitioning
+                      ? "opacity-0 transform translate-y-5"
+                      : "opacity-100"
+                  }`}
+                >
+                  {subtitle}
+                </p>
+              )}
 
-            {showProgressBar && (
-              <div
-                className="relative h-2 w-48 overflow-hidden rounded-full bg-white/20 mt-8"
-                style={{
-                  transform: `translateY(${Math.max(0, offsetY * -0.1)}px)`,
-                  opacity: Math.max(0.1, 1 - offsetY / 400),
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#fcb11b] via-white to-orange-400 animate-pulse" />
+              {showProgressBar && (
                 <div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                  className={`relative h-2 w-48 overflow-hidden rounded-full mt-10 bg-white/20 transition-all duration-1000 ${
+                    isTransitioning ? "opacity-30" : "opacity-100"
+                  }`}
                   style={{
-                    animation: "shimmer 2s infinite",
+                    transform: `translateY(${Math.max(0, offsetY * -0.1)}px)`,
                   }}
-                />
-              </div>
-            )}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#fcb11b] via-white to-orange-400 animate-pulse" />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                    style={{ animation: "shimmer 2s infinite" }}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Final Transformation Section */}
+            <div>
+              {subtitle && (
+                <p
+                  className={`text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed transition-all duration-1000 ${
+                    scrollProgress > 0.85
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-10"
+                  }`}
+                >
+                  {subtitle}
+                </p>
+              )}
+
+              {showProgressBar && (
+                <div
+                  className={`relative h-2 w-48 overflow-hidden rounded-full bg-white/20 transition-all mt-10 duration-1000 ${
+                    scrollProgress > 0.85
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-10"
+                  }`}
+                  style={{
+                    transform: `translateY(${Math.max(0, offsetY * -0.1)}px)`,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#fcb11b] via-white to-orange-400 animate-pulse" />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                    style={{ animation: "shimmer 2s infinite" }}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
         {showScrollIndicator && height === "min-h-screen" && (
           <div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20"
-            style={{ opacity: Math.max(0, 1 - offsetY / 300) }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20 transition-all duration-1000"
+            style={{
+              opacity: Math.max(0, 1 - offsetY / 300),
+              transform: `translateX(-50%) ${
+                isTransitioning ? "translateY(20px)" : ""
+              }`,
+            }}
           >
-            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse" />
+            <div className="w-6 h-10 border-2 border-black/60 dark:border-white/60 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-black/60 dark:bg-white/60 rounded-full mt-2 animate-pulse" />
             </div>
-            <p className="text-white/60 text-sm mt-2 font-medium">Scroll</p>
+            <p className="text-black/60 dark:text-white/60 text-sm mt-2 font-medium">
+              Scroll
+            </p>
           </div>
         )}
       </div>
-
-      {/* Spacer to allow scroll distance for the sticky effect */}
-      {/* <div className="h-screen bg-transparent pointer-events-none"></div> */}
 
       <style jsx>{`
         @keyframes shimmer {

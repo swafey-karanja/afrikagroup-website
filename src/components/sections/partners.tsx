@@ -72,10 +72,7 @@ const BlogCarousel = () => {
   };
 
   return (
-    <section
-      className="w-full py-12 md:py-16 lg:py-20 bg-[#fffbf0] backdrop-blur-xl dark:bg-black"
-      style={{ borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
-    >
+    <section className="w-full py-12 md:py-16 lg:py-20">
       <div className="w-full">
         {/* Header */}
         <div className="container px-4 md:px-6 mx-auto mb-12">

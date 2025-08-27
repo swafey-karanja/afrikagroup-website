@@ -24,7 +24,7 @@ const AwardsSection = () => {
   ];
 
   return (
-    <div className="bg-[#fffbf0] backdrop-blur-xl dark:bg-black">
+    <div className="">
       <div className="container px-4 md:px-6 py-8 mx-auto">
         {/* Header */}
         <div>
