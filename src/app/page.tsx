@@ -8,7 +8,7 @@ import Footer from "@/components/layout/Footer";
 export default function Home() {
   return (
     <div
-      className="bg-[#fffaeb] backdrop-blur-xl dark:bg-gray-900 relative overflow-hidden w-full"
+      className="bg-[#fffaeb]/20 backdrop-blur-xl dark:bg-black/40 relative overflow-hidden w-full"
       style={{
         borderTopLeftRadius: "clamp(20px, 8vw, 60px)",
         borderTopRightRadius: "clamp(20px, 8vw, 60px)",

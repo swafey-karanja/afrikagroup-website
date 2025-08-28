@@ -1,6 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 const EventGallery = () => {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -71,27 +78,36 @@ const EventGallery = () => {
   return (
     <div className="w-full py-6">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="pb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            <span className="text-[#fcb11b]">Our</span> partners
+        <div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <span className="text-[#fcb11b]">Image</span> Gallery
           </h2>
-          <div className="w-20 h-1 bg-[#fcb11b]"></div>
+          <div className="w-16 sm:w-20 h-1 bg-[#fcb11b]"></div>
         </div>
-        {/* Filter Navigation */}
-        <div className="flex flex-wrap justify-center gap-8 mb-16">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`text-lg font-medium transition-all duration-300 hover:text-[#fcb11b] ${
-                activeFilter === filter
-                  ? "text-[#fcb11b] border-b-2 border-[#fcb11b] pb-1"
-                  : "dark:text-white text-black hover:scale-105"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+
+        {/* Filter Dropdown Navigation */}
+        <div className="flex justify-start py-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex bg-[#fcb11b] items-center gap-2 px-4 py-1 text-md font-medium text-black dark:text-white border rounded-lg">
+              Filter: {activeFilter}
+              <ChevronDown className="w-3 h-3" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-40">
+              {filters.map((filter) => (
+                <DropdownMenuItem
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`cursor-pointer text-sm py-1 ${
+                    activeFilter === filter
+                      ? "bg-[#fcb11b] text-white"
+                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  {filter}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Portfolio Grid */}

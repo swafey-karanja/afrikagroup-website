@@ -28,10 +28,10 @@ const AwardsSection = () => {
       <div className="container px-4 md:px-6 py-8 mx-auto">
         {/* Header */}
         <div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             <span className="text-[#fcb11b]">Awards</span>
           </h2>
-          <div className="w-20 h-1 bg-[#fcb11b]"></div>
+          <div className="w-16 sm:w-20 h-1 bg-[#fcb11b]"></div>
         </div>
 
         {/* Services List */}

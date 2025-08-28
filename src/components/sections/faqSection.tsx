@@ -63,13 +63,13 @@ export default function Accordion() {
   return (
     <div className=" w-full py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="pb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        <div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             <span className="text-[#fcb11b]">Frequently</span> asked questions
           </h2>
-          <div className="w-20 h-1 bg-[#fcb11b]"></div>
+          <div className="w-16 sm:w-20 h-1 bg-[#fcb11b]"></div>
         </div>
-        <ul className="">
+        <ul className="py-6">
           {accordionData.map((item, index) => (
             <li key={item.id} className="relative">
               {/* Title button */}
