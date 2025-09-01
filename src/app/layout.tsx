@@ -49,11 +49,9 @@ export default function RootLayout({
 
           {/* Main content - positioned above background */}
           <div className="relative min-h-[400vh] ">
-            {" "}
-            {/* Increased height for scroll effect */}
             <Navbar />
-            <Hero />
             {children}
+            {/* <Footer /> */}
             {/* Add some spacing to allow for scroll effect */}
             <div className="h-[94vh] invisible pointer-events-none bg-transparent"></div>
           </div>

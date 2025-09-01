@@ -15,6 +15,20 @@ interface HeroProps {
   customContent?: ReactNode;
   containerBackground?: string;
   className?: string;
+  // New video-related props
+  videoBackground?: {
+    src: string;
+    poster?: string;
+    loop?: boolean;
+    muted?: boolean;
+    autoplay?: boolean;
+    overlay?: boolean;
+    overlayOpacity?: number;
+    overlayColor?: string;
+  };
+  // Control what content to show
+  showTextContent?: boolean;
+  showVideoBackground?: boolean;
 }
 
 const Hero: React.FC<HeroProps> = ({
@@ -55,10 +69,15 @@ const Hero: React.FC<HeroProps> = ({
   customContent,
   containerBackground = "transparent",
   className = "",
+  // New props with defaults
+  videoBackground,
+  showTextContent = true,
+  showVideoBackground = false,
 }) => {
   const [offsetY, setOffsetY] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -91,21 +110,77 @@ const Hero: React.FC<HeroProps> = ({
   const parallaxMultiplier = isMobile ? 0.15 : 0.3;
   const opacityDivisor = isMobile ? 400 : 800;
 
+  // Video background configuration
+  const videoConfig = {
+    loop: videoBackground?.loop ?? true,
+    muted: videoBackground?.muted ?? true,
+    autoplay: videoBackground?.autoplay ?? true,
+    poster: videoBackground?.poster,
+    overlay: videoBackground?.overlay ?? true,
+    overlayOpacity: videoBackground?.overlayOpacity ?? 0.3,
+    overlayColor: videoBackground?.overlayColor ?? "black",
+  };
+
   return (
     <>
       <div
         className={`sticky top-0 bottom-0 h-screen overflow-hidden ${containerBackground} ${className}`}
       >
-        <div className="absolute inset-0 overflow-hidden"></div>
+        {/* Video Background */}
+        {showVideoBackground && videoBackground?.src && (
+          <>
+            <video
+              className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${
+                videoLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              autoPlay={videoConfig.autoplay}
+              loop={videoConfig.loop}
+              muted={videoConfig.muted}
+              poster={videoConfig.poster}
+              onLoadedData={() => setVideoLoaded(true)}
+              onCanPlay={() => setVideoLoaded(true)}
+            >
+              <source src={videoBackground.src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Video Overlay */}
+            {videoConfig.overlay && (
+              <div
+                className="absolute inset-0 z-10"
+                style={{
+                  backgroundColor: videoConfig.overlayColor,
+                  opacity: videoConfig.overlayOpacity,
+                }}
+              />
+            )}
+
+            {/* Loading placeholder for video */}
+            {!videoLoaded && (
+              <div className="absolute inset-0 bg-gray-900 z-5 flex items-center justify-center">
+                <div className="w-12 h-12 border-4 border-[#fcb11b] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Background overlay for non-video mode */}
+        {!showVideoBackground && (
+          <div className="absolute inset-0 overflow-hidden"></div>
+        )}
 
         <div
-          className={`relative z-20 flex flex-col lg:flex-row items-center justify-center lg:justify-between ${
+          className={`relative ${
+            showVideoBackground ? "z-20" : "z-20"
+          } flex flex-col lg:flex-row items-center justify-center lg:justify-between ${
             height === "min-h-screen" ? "min-h-screen" : "h-full"
           } px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-8 lg:py-0`}
         >
           {/* Main Content */}
           <div
-            className="flex-1 w-full max-w-4xl text-center lg:text-left flex flex-col items-center lg:items-start justify-center mt-40 md:mt-0"
+            className={`flex-1 w-full max-w-4xl text-center lg:text-left flex flex-col items-center lg:items-start justify-center mt-40 md:mt-0 ${
+              showVideoBackground ? "text-white" : ""
+            }`}
             style={{
               transform: `translateY(${Math.max(
                 0,
@@ -118,69 +193,91 @@ const Hero: React.FC<HeroProps> = ({
               customContent
             ) : (
               <>
-                <div className="relative">
-                  <h1
-                    className={`text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] text-black dark:text-white mb-4 sm:mb-6 leading-[0.85] tracking-tight transition-all duration-1000 ${
-                      isTransitioning
-                        ? "opacity-0 transform -translate-y-10"
-                        : "opacity-100"
-                    }`}
-                  >
-                    {title}
-                  </h1>
-
-                  {description && (
-                    <p
-                      className={`text-base px-12 md:px-0 sm:text-lg md:text-xl lg:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed transition-all duration-1000 max-w-2xl mx-auto lg:mx-0 ${
+                {showTextContent && (
+                  <div className="relative">
+                    <h1
+                      className={`text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] ${
+                        showVideoBackground
+                          ? "text-white drop-shadow-2xl"
+                          : "text-black dark:text-white"
+                      } mb-4 sm:mb-6 leading-[0.85] tracking-tight transition-all duration-1000 ${
                         isTransitioning
                           ? "opacity-0 transform -translate-y-10"
                           : "opacity-100"
                       }`}
                     >
-                      {description}
-                    </p>
-                  )}
-                </div>
-
-                {/* Final Transformation Section */}
-                <div className="absolute inset-0 z-50">
-                  <div>
-                    <h1
-                      className={`text-4xl lg:text-8xl text-black font-bold dark:text-white mb-4 sm:mb-6 leading-[0.85] tracking-tight transition-all duration-1000 ${
-                        scrollProgress > 0.85
-                          ? "opacity-100 transform translate-y-0"
-                          : "opacity-0 transform translate-y-10"
-                      }`}
-                    >
-                      we are committed
-                      <br />
-                      <span
-                        className={`text-[#fcb11b] ${styles["animate-spin-glow"]} inline-block mt-2 sm:mt-5`}
-                      >
-                        We aim for progress.
-                      </span>
+                      {title}
                     </h1>
 
                     {description && (
                       <p
-                        className={`text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-black dark:text-white py-6 sm:py-10 leading-relaxed transition-all duration-1000 max-w-2xl mx-auto lg:mx-0 ${
-                          scrollProgress > 0.85
-                            ? "opacity-100 transform translate-y-0"
-                            : "opacity-0 transform translate-y-10"
+                        className={`text-base px-12 md:px-0 sm:text-lg md:text-xl lg:text-2xl font-medium ${
+                          showVideoBackground
+                            ? "text-white drop-shadow-lg"
+                            : "text-black dark:text-white"
+                        } mb-4 leading-relaxed transition-all duration-1000 max-w-2xl mx-auto lg:mx-0 ${
+                          isTransitioning
+                            ? "opacity-0 transform -translate-y-10"
+                            : "opacity-100"
                         }`}
                       >
                         {description}
                       </p>
                     )}
                   </div>
-                </div>
+                )}
+
+                {/* Final Transformation Section */}
+                {showTextContent && (
+                  <div className="absolute inset-0 z-50">
+                    <div>
+                      <h1
+                        className={`text-4xl lg:text-8xl ${
+                          showVideoBackground
+                            ? "text-white drop-shadow-2xl"
+                            : "text-black dark:text-white"
+                        } font-bold mb-4 sm:mb-6 leading-[0.85] tracking-tight transition-all duration-1000 ${
+                          scrollProgress > 0.85
+                            ? "opacity-100 transform translate-y-0"
+                            : "opacity-0 transform translate-y-10"
+                        }`}
+                      >
+                        we are committed
+                        <br />
+                        <span
+                          className={`text-[#fcb11b] ${styles["animate-spin-glow"]} inline-block mt-2 sm:mt-5`}
+                        >
+                          We aim for progress.
+                        </span>
+                      </h1>
+
+                      {description && (
+                        <p
+                          className={`text-base sm:text-lg md:text-xl lg:text-2xl font-medium ${
+                            showVideoBackground
+                              ? "text-white drop-shadow-lg"
+                              : "text-black dark:text-white"
+                          } py-6 sm:py-10 leading-relaxed transition-all duration-1000 max-w-2xl mx-auto lg:mx-0 ${
+                            scrollProgress > 0.85
+                              ? "opacity-100 transform translate-y-0"
+                              : "opacity-0 transform translate-y-10"
+                          }`}
+                        >
+                          {description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
               </>
             )}
           </div>
 
           {/* Sidebar Content */}
           <div
-            className="flex-1 w-full max-w-md mt-8 lg:mt-0 lg:ml-8 text-center lg:text-left flex flex-col items-center lg:items-start justify-center lg:self-end lg:pb-20"
+            className={`flex-1 w-full max-w-md mt-8 lg:mt-0 lg:ml-8 text-center lg:text-left flex flex-col items-center lg:items-start justify-center lg:self-end lg:pb-20 ${
+              showVideoBackground ? "text-white" : ""
+            }`}
             style={{
               transform: `translateY(${Math.max(0, offsetY * -0.2)}px)`,
               opacity: Math.max(0.2, 1 - offsetY / 600),
@@ -189,7 +286,11 @@ const Hero: React.FC<HeroProps> = ({
             <div>
               {subtitle && (
                 <p
-                  className={`text-lg sm:text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed transition-all duration-1000 ${
+                  className={`text-lg sm:text-xl md:text-2xl font-medium ${
+                    showVideoBackground
+                      ? "text-white drop-shadow-lg"
+                      : "text-black dark:text-white"
+                  } mb-4 leading-relaxed transition-all duration-1000 ${
                     isTransitioning
                       ? "opacity-0 transform translate-y-5"
                       : "opacity-100"
@@ -201,7 +302,9 @@ const Hero: React.FC<HeroProps> = ({
 
               {showProgressBar && (
                 <div
-                  className={`relative h-2 w-32 sm:w-48 overflow-hidden rounded-full mt-6 sm:mt-10 bg-white/20 transition-all duration-1000 mx-auto lg:mx-0 ${
+                  className={`relative h-2 w-32 sm:w-48 overflow-hidden rounded-full mt-6 sm:mt-10 ${
+                    showVideoBackground ? "bg-white/20" : "bg-white/20"
+                  } transition-all duration-1000 mx-auto lg:mx-0 ${
                     isTransitioning ? "opacity-30" : "opacity-100"
                   }`}
                   style={{
@@ -217,11 +320,15 @@ const Hero: React.FC<HeroProps> = ({
               )}
             </div>
 
-            {/* Final Transformation Section */}
+            {/* Final Transformation Section for Sidebar */}
             <div>
               {subtitle && (
                 <p
-                  className={`text-lg sm:text-xl md:text-2xl font-medium text-black dark:text-white mb-4 leading-relaxed transition-all duration-1000 ${
+                  className={`text-lg sm:text-xl md:text-2xl font-medium ${
+                    showVideoBackground
+                      ? "text-white drop-shadow-lg"
+                      : "text-black dark:text-white"
+                  } mb-4 leading-relaxed transition-all duration-1000 ${
                     scrollProgress > 0.85
                       ? "opacity-100 transform translate-y-0"
                       : "opacity-0 transform translate-y-10"
@@ -233,7 +340,9 @@ const Hero: React.FC<HeroProps> = ({
 
               {showProgressBar && (
                 <div
-                  className={`relative h-2 w-32 sm:w-48 overflow-hidden rounded-full bg-white/20 transition-all mt-6 sm:mt-10 duration-1000 mx-auto lg:mx-0 ${
+                  className={`relative h-2 w-32 sm:w-48 overflow-hidden rounded-full ${
+                    showVideoBackground ? "bg-white/20" : "bg-white/20"
+                  } transition-all mt-6 sm:mt-10 duration-1000 mx-auto lg:mx-0 ${
                     scrollProgress > 0.85
                       ? "opacity-100 transform translate-y-0"
                       : "opacity-0 transform translate-y-10"
@@ -263,10 +372,28 @@ const Hero: React.FC<HeroProps> = ({
               }`,
             }}
           >
-            <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-black/60 dark:border-white/60 rounded-full flex justify-center">
-              <div className="w-1 h-2 sm:h-3 bg-black/60 dark:bg-white/60 rounded-full mt-1 sm:mt-2 animate-pulse" />
+            <div
+              className={`w-5 h-8 sm:w-6 sm:h-10 border-2 ${
+                showVideoBackground
+                  ? "border-white/60"
+                  : "border-black/60 dark:border-white/60"
+              } rounded-full flex justify-center`}
+            >
+              <div
+                className={`w-1 h-2 sm:h-3 ${
+                  showVideoBackground
+                    ? "bg-white/60"
+                    : "bg-black/60 dark:bg-white/60"
+                } rounded-full mt-1 sm:mt-2 animate-pulse`}
+              />
             </div>
-            <p className="text-black/60 dark:text-white/60 text-xs sm:text-sm mt-2 font-medium">
+            <p
+              className={`${
+                showVideoBackground
+                  ? "text-white/60"
+                  : "text-black/60 dark:text-white/60"
+              } text-xs sm:text-sm mt-2 font-medium`}
+            >
               Scroll
             </p>
           </div>

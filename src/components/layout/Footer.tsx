@@ -14,7 +14,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer
-      className=" w-full py-12 md:py-16 z-50"
+      className="w-full py-12 md:py-16 z-50"
       style={{
         borderBottomLeftRadius: "50px",
         borderBottomRightRadius: "50px",
