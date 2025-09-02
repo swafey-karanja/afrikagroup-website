@@ -71,7 +71,7 @@ const Navbar = () => {
     <>
       {/* Main Navbar */}
       <div
-        className={`fixed top-0 left-0 w-full flex justify-center pb-4 z-20 transition-transform duration-600 ease-in-out ${
+        className={`fixed top-0 left-0 w-full flex justify-center pb-4 z-50 transition-transform duration-600 ease-in-out ${
           isVisible ? "transform translate-y-0" : "transform -translate-y-full"
         }`}
       >

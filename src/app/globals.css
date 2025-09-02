@@ -120,3 +120,151 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Enhanced CSS for Unified Parallax System - Add to globals.css */
+
+/* Performance optimizations for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Unified parallax background optimizations */
+.unified-parallax-container {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Hero section within unified system */
+.unified-hero-content {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Footer section within unified system */
+.unified-footer-content {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth transitions for all parallax elements */
+.parallax-element {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Performance optimization for background animations */
+.casino-animation {
+  will-change: transform, opacity;
+  contain: layout style paint;
+}
+
+/* GPU acceleration for geometric shapes */
+.geometric-shape {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  contain: layout;
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Anti-aliasing for sharp text during animations */
+.parallax-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Optimize backdrop blur performance */
+.backdrop-blur-optimized {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  will-change: backdrop-filter;
+}
+
+/* Prevent layout shift during scroll */
+.scroll-container {
+  contain: layout style;
+}
+
+/* Smooth content transitions */
+.content-section {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .unified-parallax-container {
+    transform: none;
+  }
+
+  .parallax-element {
+    transform: none !important;
+  }
+
+  .geometric-shape {
+    animation-duration: 2s !important;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  .unified-parallax-container,
+  .parallax-element,
+  .casino-animation {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .casino-animation {
+    opacity: 0.8;
+  }
+
+  .parallax-text {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  }
+}
