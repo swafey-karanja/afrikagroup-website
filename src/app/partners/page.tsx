@@ -4,14 +4,14 @@ import AnimatedCasinoBackground, {
 } from "@/components/shared/background";
 import ScrollGeometricBackground from "@/components/shared/pageBackground";
 import React from "react";
-import CareersSection from "./sections/jobCardsSection";
-import WhyWorkWithUs from "./sections/whyJoinUsSection";
-import RoadmapSection from "./sections/roadmapSection";
+import OpeningText from "./sections/openingText";
+import PartnersGrid from "./sections/partnersSection";
+import ScrollAnimatedCircle from "@/components/shared/pageBackground";
+import PartnershipSection from "./sections/whyPartner";
 
-const careersPage = () => {
-  // Define hero content for homepage
-  const aboutPageHero: HeroContent = {
-    title: "Careers",
+const partnersPage = () => {
+  const partnersPageHero: HeroContent = {
+    title: "Our Partners",
     description: "Join our evergrowing team",
     showScrollIndicator: true,
     ctaButton: {
@@ -26,9 +26,9 @@ const careersPage = () => {
         enableParallax={true}
         backgroundColor=""
         showHero={true}
-        heroContent={aboutPageHero}
+        heroContent={partnersPageHero}
         showFooter={true}
-        videoBackground="/videos/background-2.mp4"
+        imageBackground="/images/image-bg-1.jpg"
       />
       <div
         className="bg-[#fffaeb]/40 backdrop-blur-xl dark:bg-black/40 overflow-hidden w-full h-auto relative z-20"
@@ -40,11 +40,11 @@ const careersPage = () => {
           minHeight: "500vh",
         }}
       >
-        <ScrollGeometricBackground />
+        <ScrollAnimatedCircle />
         <div className="relative z-50 pt-20">
-          <WhyWorkWithUs />
-          <CareersSection />
-          <RoadmapSection />
+          <OpeningText />
+          <PartnershipSection />
+          <PartnersGrid />
           <Footer />
         </div>
       </div>
@@ -52,4 +52,4 @@ const careersPage = () => {
   );
 };
 
-export default careersPage;
+export default partnersPage;

@@ -1,5 +1,5 @@
 // page.tsx
-import ScrollGeometricBackground from "@/components/shared/pageBackground";
+
 import BlogCarousel from "@/components/sections/partners";
 import AwardsSection from "@/components/sections/awards";
 import EventGallery from "@/components/sections/EventGallery";
@@ -8,11 +8,11 @@ import Footer from "@/components/layout/Footer";
 import AnimatedCasinoBackground, {
   HeroContent,
 } from "@/components/shared/background";
+import ScrollAnimatedCircle from "@/components/shared/pageBackground";
 
 export default function Home() {
   // Define hero content for homepage
   const homepageHero: HeroContent = {
-    type: "text",
     title: "Africanising",
     highlightWord: "iGaming",
     description:
@@ -31,7 +31,7 @@ export default function Home() {
       <AnimatedCasinoBackground
         fixed={true}
         enableParallax={true}
-        backgroundColor="bg-[#ffedca] dark:bg-black"
+        backgroundColor="bg-[#ffedca] dark:bg-black/60"
         opacity="opacity-100"
         showHero={true}
         heroContent={homepageHero}
@@ -48,7 +48,7 @@ export default function Home() {
           minHeight: "300vh",
         }}
       >
-        <ScrollGeometricBackground />
+        <ScrollAnimatedCircle />
 
         <div className="relative z-50 pt-20">
           <BlogCarousel />

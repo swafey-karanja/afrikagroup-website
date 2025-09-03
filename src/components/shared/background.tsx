@@ -4,17 +4,14 @@ import React, { useEffect, useState } from "react";
 import styles from "../../../styles/Hero.module.css";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 // Define hero content types
 export interface HeroContent {
-  type: "text" | "video" | "custom";
   title?: string;
   subtitle?: string;
   description?: string;
   highlightWord?: string;
-  videoSrc?: string;
-  videoTitle?: string;
-  videoDescription?: string;
   customContent?: React.ReactNode;
   showScrollIndicator?: boolean;
   ctaButton?: {
@@ -36,6 +33,7 @@ interface AnimatedCasinoBackgroundProps {
    */
   backgroundColor?: string;
   videoBackground?: string;
+  imageBackground?: string;
   /**
    * Opacity of the entire background effect
    * @default "opacity-100"
@@ -69,7 +67,6 @@ interface AnimatedCasinoBackgroundProps {
 
 // Default hero content
 const defaultHeroContent: HeroContent = {
-  type: "text",
   title: "Africanising",
   highlightWord: "iGaming",
   description:
@@ -88,6 +85,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
   heroContent = defaultHeroContent,
   showFooter = false,
   videoBackground,
+  imageBackground,
 }) => {
   const [scrollY, setScrollY] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -477,7 +475,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
           </video>
 
           {/* Overlay (optional: darken video for better text contrast) */}
-          {/* <div className="absolute inset-0 bg-black/40"></div> */}
+          <div className="absolute z-10 inset-0 bg-transparent dark:bg-black/40"></div>
 
           {/* Hero Content */}
           <div
@@ -520,9 +518,6 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
                   <p className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-4 leading-relaxed">
                     {heroContent.subtitle}
                   </p>
-                  {/* <div className="relative h-2 w-32 sm:w-48 overflow-hidden rounded-full mt-6 sm:mt-10 bg-white/20 mx-auto lg:mx-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#fcb11b] via-white to-orange-400 animate-pulse" />
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -545,7 +540,84 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
         </div>
       )}
 
-      {showHero && !videoBackground && (
+      {showHero && imageBackground && (
+        <div className="relative w-full h-screen overflow-hidden">
+          {/* Background Video */}
+          <Image
+            className="absolute inset-0 w-full h-full object-cover z-10"
+            src={imageBackground}
+            alt="Background"
+            fill
+            priority
+          />
+
+          {/* Overlay (optional: darken video for better text contrast) */}
+          <div className="absolute z-10 inset-0 bg-transparent dark:bg-black/60"></div>
+
+          {/* Hero Content */}
+          <div
+            className="relative z-20 flex items-center justify-center h-full"
+            style={{
+              opacity: heroVisibility,
+              transform: `translateY(${heroParallax}px)`,
+            }}
+          >
+            <div className="w-full mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 pointer-events-auto">
+              <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between">
+                {/* Hero Content */}
+                <div className="flex-1 text-center lg:text-left flex flex-col items-center lg:items-start justify-center">
+                  <div className="relative">
+                    <h1 className="text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] text-white mb-4 sm:mb-6 leading-[0.85] tracking-tight transition-all duration-700">
+                      {heroContent.title}
+                      <br />
+                    </h1>
+                    <p className="text-base px-24 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-white mb-4 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                      {heroContent.description}
+                    </p>
+
+                    {heroContent.ctaButton && (
+                      <div className="mt-8">
+                        <Button
+                          asChild
+                          className="bg-[#fcb11b] hover:bg-[#fcb11b]/90 text-black font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
+                        >
+                          <Link href={heroContent.ctaButton.href}>
+                            {heroContent.ctaButton.text}
+                          </Link>
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Hero Sidebar */}
+                <div className="flex-1 w-full max-w-md mt-8 lg:ml-8 text-center lg:text-left flex flex-col items-center lg:items-start justify-center lg:self-end">
+                  <p className="text-lg sm:text-xl md:text-2xl font-medium text-white mb-4 leading-relaxed">
+                    {heroContent.subtitle}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Scroll Indicator */}
+            {heroContent.showScrollIndicator && (
+              <div
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+                style={{ opacity: Math.max(0, 1 - scrollY / 300) }}
+              >
+                <div className="w-6 h-10 border-2 border-[#fcb11b] rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-[#fcb11b] rounded-full mt-2 animate-pulse" />
+                </div>
+                {/* <p className="text-[#fcb11b] text-sm mt-2 ml--2 font-medium">
+                  Scroll
+                </p> */}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {showHero && !videoBackground && !imageBackground && (
         <div
           className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
           style={{
@@ -619,7 +691,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
       {/* FOOTER SECTION INTEGRATION */}
       {showFooter && (
         <div
-          className="absolute inset-0 z-15 flex items-center justify-center pointer-events-none bg-[#fcb11b]/70"
+          className="absolute inset-0 z-15 flex items-center justify-center pointer-events-none bg-[#fcb11b]/60"
           style={{
             opacity: footerVisibility,
             transform: `translateY(${(1 - footerVisibility) * 100}px)`,
@@ -632,7 +704,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
               <div className=" text-center lg:text-left">
                 <div className="mb-8">
                   <img
-                    className="h-80 w-auto mx-auto lg:mx-0"
+                    className="h-30 md:h-60 lg:h-80 w-auto mx-auto lg:mx-0"
                     src="/images/new-logo-5.png"
                     alt="Company Logo"
                   />

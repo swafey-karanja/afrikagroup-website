@@ -21,7 +21,7 @@ const Footer = () => {
       }}
     >
       <div className="w-[90%] mx-auto">
-        <div className="pt-8 border-t border-gray-300">
+        <div className="py-8 border-t border-gray-300">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0"></div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
