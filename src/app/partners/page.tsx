@@ -4,10 +4,10 @@ import AnimatedCasinoBackground, {
 } from "@/components/shared/background";
 import ScrollGeometricBackground from "@/components/shared/pageBackground";
 import React from "react";
-import OpeningText from "./sections/openingText";
-import PartnersGrid from "./sections/partnersSection";
+import OpeningText from "./sections/OpeningText";
+import PartnersGrid from "./sections/PartnersSection";
 import ScrollAnimatedCircle from "@/components/shared/pageBackground";
-import PartnershipSection from "./sections/whyPartner";
+import PartnershipSection from "./sections/WhyPartnerSection";
 
 const partnersPage = () => {
   const partnersPageHero: HeroContent = {

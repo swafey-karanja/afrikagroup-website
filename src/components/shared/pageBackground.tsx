@@ -51,7 +51,7 @@ export default function ScrollAnimatedCircle() {
       </div>
 
       {/* Circle container - increased size */}
-      <div className="fixed top-[1200px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] flex items-center justify-center pointer-events-none">
+      <div className="fixed top-[1500px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] flex items-center justify-center pointer-events-none">
         {/* SVG with larger viewBox */}
         <svg
           className="w-full h-full transform -rotate-90"

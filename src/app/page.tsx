@@ -1,9 +1,9 @@
 // page.tsx
 
-import BlogCarousel from "@/components/sections/partners";
-import AwardsSection from "@/components/sections/awards";
+import BrandCarousel from "@/components/sections/Brands";
+import AwardsSection from "@/components/sections/Awards";
 import EventGallery from "@/components/sections/EventGallery";
-import Accordion from "@/components/sections/faqSection";
+import Accordion from "@/components/sections/FaqSection";
 import Footer from "@/components/layout/Footer";
 import AnimatedCasinoBackground, {
   HeroContent,
@@ -51,7 +51,7 @@ export default function Home() {
         <ScrollAnimatedCircle />
 
         <div className="relative z-50 pt-20">
-          <BlogCarousel />
+          <BrandCarousel />
           <AwardsSection />
           <EventGallery />
           <Accordion />

@@ -121,7 +121,7 @@ const PartnersGrid = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                <span className="text-[#fcb11b]">Our</span> partners
+                <span className="text-[#fcb11b]">Our</span> Partners
               </h2>
               <div className="w-16 sm:w-20 h-1 bg-[#fcb11b]"></div>
             </div>

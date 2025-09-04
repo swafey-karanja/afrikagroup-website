@@ -101,30 +101,24 @@ const Navbar = () => {
 
             {/* Navigation Links - Desktop */}
             <div className="hidden md:flex flex-1 justify-end items-center space-x-8">
-              <a
-                href="#"
+              <Link
+                href="/partners"
                 className="text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 font-bold text-md"
               >
                 Partners
-              </a>
-              <a
-                href="#"
-                className="text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 font-bold text-md"
-              >
-                Awards
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/events"
                 className="text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 font-bold text-md"
               >
                 Events
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/careers"
                 className="text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 font-bold text-md"
               >
                 Careers
-              </a>
+              </Link>
               <ModeToggle />
             </div>
 
@@ -186,34 +180,27 @@ const Navbar = () => {
           {/* Navigation Links */}
           <nav className="flex-1 px-4 py-4">
             <div className="space-y-2">
-              <a
-                href="#"
+              <Link
+                href="/partners"
                 onClick={closeSidebar}
                 className="block text-lg font-semibold text-white hover:text-[#fcb11b] dark:hover:text-[#fcb11b] transition-colors duration-200 py-2 border-b border-[#fcb11b] dark:border-gray-800"
               >
                 Partners
-              </a>
-              <a
-                href="#"
-                onClick={closeSidebar}
-                className="block text-lg font-semibold text-white hover:text-[#fcb11b] dark:hover:text-[#fcb11b] transition-colors duration-200 py-2 border-b border-[#fcb11b] dark:border-gray-800"
-              >
-                Awards
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/events"
                 onClick={closeSidebar}
                 className="block text-lg font-semibold text-white hover:text-[#fcb11b] dark:hover:text-[#fcb11b] transition-colors duration-200 py-2 border-b border-[#fcb11b] dark:border-gray-800"
               >
                 Events
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/careers"
                 onClick={closeSidebar}
                 className="block text-lg font-semibold text-white hover:text-[#fcb11b] dark:hover:text-[#fcb11b] transition-colors duration-200 py-2 border-b border-[#fcb11b] dark:border-gray-800"
               >
                 Careers
-              </a>
+              </Link>
             </div>
           </nav>
 

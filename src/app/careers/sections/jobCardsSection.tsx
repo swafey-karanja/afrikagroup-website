@@ -187,7 +187,7 @@ const CareersPage = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            <span className="text-[#fcb11b]">Open</span> positions
+            <span className="text-[#fcb11b]">Open</span> Positions
           </h2>
           <div className="w-16 sm:w-20 h-1 bg-[#fcb11b]"></div>
         </div>

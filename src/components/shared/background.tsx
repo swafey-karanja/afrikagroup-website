@@ -494,7 +494,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
                       {heroContent.title}
                       <br />
                     </h1>
-                    <p className="text-base px-24 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-white mb-4 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    <p className="text-base px-24 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-white mb-4 leading-relaxed max-w-4xl mx-auto lg:mx-0">
                       {heroContent.description}
                     </p>
 
@@ -571,7 +571,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
                       {heroContent.title}
                       <br />
                     </h1>
-                    <p className="text-base px-24 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-white mb-4 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    <p className="text-base px-24 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-white mb-4 leading-relaxed max-w-4xl mx-auto lg:mx-0">
                       {heroContent.description}
                     </p>
 
@@ -640,7 +640,7 @@ const AnimatedCasinoBackground: React.FC<AnimatedCasinoBackgroundProps> = ({
                       {heroContent.highlightWord}
                     </span>
                   </h1>
-                  <p className="text-base px-16 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-black dark:text-white mb-4 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                  <p className="text-base px-16 md:px-0 sm:text-xl md:text-2xl lg:text-4xl font-medium text-black dark:text-white mb-4 leading-relaxed max-w-4xl mx-auto lg:mx-0">
                     {heroContent.description}
                   </p>
 
