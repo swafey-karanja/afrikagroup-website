@@ -173,7 +173,7 @@ interface HiringProcessTimelineProps {
   className?: string;
 }
 
-const RoadMapSection = ({
+const Roadmap = ({
   steps = defaultHiringSteps,
   closingMessage = "Start a new journey!",
   className = "",
@@ -221,4 +221,4 @@ const RoadMapSection = ({
   );
 };
 
-export default RoadMapSection;
+export default Roadmap;

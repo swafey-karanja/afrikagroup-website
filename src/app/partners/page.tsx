@@ -2,12 +2,12 @@ import Footer from "@/components/layout/Footer";
 import AnimatedCasinoBackground, {
   HeroContent,
 } from "@/components/shared/background";
-import ScrollGeometricBackground from "@/components/shared/pageBackground";
+// import ScrollGeometricBackground from "@/components/shared/pageBackground";
 import React from "react";
-import OpeningText from "./sections/OpeningText";
-import PartnersGrid from "./sections/PartnersSection";
 import ScrollAnimatedCircle from "@/components/shared/pageBackground";
 import PartnershipSection from "./sections/WhyPartnerSection";
+import OpeningTextSections from "./sections/OpeningTextSections";
+import Partners from "./sections/Partners";
 
 const partnersPage = () => {
   const partnersPageHero: HeroContent = {
@@ -42,9 +42,9 @@ const partnersPage = () => {
       >
         <ScrollAnimatedCircle />
         <div className="relative z-50 pt-20">
-          <OpeningText />
+          <OpeningTextSections />
           <PartnershipSection />
-          <PartnersGrid />
+          <Partners />
           <Footer />
         </div>
       </div>

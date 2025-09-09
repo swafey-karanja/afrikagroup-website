@@ -1,6 +1,6 @@
 import React from "react";
 
-const OpeningText = () => {
+const OpeningTextSections = () => {
   return (
     <div className="mx-auto container flex items-center justify-center text-center py-16">
       <p className="text-xl md:text-3xl lg:text-5xl font-semibold leading-relaxed text-black dark:text-white">
@@ -14,4 +14,4 @@ const OpeningText = () => {
   );
 };
 
-export default OpeningText;
+export default OpeningTextSections;

@@ -53,7 +53,7 @@ const accordionData: AccordionItem[] = [
   },
 ];
 
-export default function FaqSection() {
+export default function FAQs() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {

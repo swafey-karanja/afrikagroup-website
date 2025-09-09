@@ -3,7 +3,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-const PartnersGrid = () => {
+const Partners = () => {
   const partners = [
     {
       id: 1,
@@ -172,4 +172,4 @@ const PartnersGrid = () => {
   );
 };
 
-export default PartnersGrid;
+export default Partners;

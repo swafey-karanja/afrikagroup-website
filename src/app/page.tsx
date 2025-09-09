@@ -8,7 +8,7 @@ import AnimatedCasinoBackground, {
 } from "@/components/shared/background";
 import ScrollAnimatedCircle from "@/components/shared/pageBackground";
 import AwardsSection from "@/components/sections/AwardsSection";
-import FaqSection from "@/components/sections/FaqSection";
+import FAQs from "@/components/sections/FAQs";
 
 export default function Home() {
   // Define hero content for homepage
@@ -54,7 +54,7 @@ export default function Home() {
           <BrandCarousel />
           <AwardsSection />
           <EventGallery />
-          <FaqSection />
+          <FAQs />
           <Footer />
         </div>
       </div>
