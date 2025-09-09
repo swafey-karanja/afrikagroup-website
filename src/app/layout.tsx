@@ -3,9 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/layout/Navbar";
-import AnimatedCasinoBackground, {
-  HeroContent,
-} from "@/components/shared/background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,21 +17,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "iGaming Solutions",
   description: "Strategic solutions for iGaming growth and expansion",
-};
-
-// Define hero content for homepage
-const homepageHero: HeroContent = {
-  type: "text",
-  title: "Africanising",
-  highlightWord: "iGaming",
-  description:
-    "Strategic solutions for iGaming growth, optimization, and expansion.",
-  subtitle: "Bringing next-level innovation to gaming, fintech & blockchain",
-  showScrollIndicator: true,
-  ctaButton: {
-    text: "Get Started",
-    href: "/contact",
-  },
 };
 
 export default function RootLayout({
