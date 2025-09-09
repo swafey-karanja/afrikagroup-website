@@ -126,7 +126,7 @@ interface WhyWorkWithUsProps {
   className?: string;
 }
 
-const WhyWorkWithUs = ({
+const WhyJoinSection = ({
   benefits = workBenefits,
   maxItems,
   className = "",
@@ -156,4 +156,4 @@ const WhyWorkWithUs = ({
   );
 };
 
-export default WhyWorkWithUs;
+export default WhyJoinSection;

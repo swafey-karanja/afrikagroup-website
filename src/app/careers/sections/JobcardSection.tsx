@@ -174,7 +174,7 @@ const JobCard = ({ job }: { job: Job }) => {
 };
 
 // Main careers component
-const CareersPage = () => {
+const JobcardSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filteredJobs =
@@ -264,4 +264,4 @@ const CareersPage = () => {
   );
 };
 
-export default CareersPage;
+export default JobcardSection;

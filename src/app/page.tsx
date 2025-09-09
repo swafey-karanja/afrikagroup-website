@@ -1,14 +1,14 @@
 // page.tsx
 
 import BrandCarousel from "@/components/sections/Brands";
-import AwardsSection from "@/components/sections/Awards";
 import EventGallery from "@/components/sections/EventGallery";
-import Accordion from "@/components/sections/FaqSection";
 import Footer from "@/components/layout/Footer";
 import AnimatedCasinoBackground, {
   HeroContent,
 } from "@/components/shared/background";
 import ScrollAnimatedCircle from "@/components/shared/pageBackground";
+import AwardsSection from "@/components/sections/AwardsSection";
+import FaqSection from "@/components/sections/FaqSection";
 
 export default function Home() {
   // Define hero content for homepage
@@ -54,7 +54,7 @@ export default function Home() {
           <BrandCarousel />
           <AwardsSection />
           <EventGallery />
-          <Accordion />
+          <FaqSection />
           <Footer />
         </div>
       </div>

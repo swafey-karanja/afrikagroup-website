@@ -4,9 +4,9 @@ import AnimatedCasinoBackground, {
 } from "@/components/shared/background";
 import ScrollGeometricBackground from "@/components/shared/pageBackground";
 import React from "react";
-import CareersSection from "./sections/JobCardsSection";
-import WhyWorkWithUs from "./sections/WhyJoinUsSection";
-import RoadmapSection from "./sections/RoadmapSection";
+import JobcardSection from "./sections/JobcardSection";
+import RoadMapSection from "./sections/RoadMapSection";
+import WhyJoinSection from "./sections/WhyJoinSection";
 
 const careersPage = () => {
   // Define hero content for homepage
@@ -42,9 +42,9 @@ const careersPage = () => {
       >
         <ScrollGeometricBackground />
         <div className="relative z-50 pt-20">
-          <WhyWorkWithUs />
-          <CareersSection />
-          <RoadmapSection />
+          <WhyJoinSection />
+          <JobcardSection />
+          <RoadMapSection />
           <Footer />
         </div>
       </div>
